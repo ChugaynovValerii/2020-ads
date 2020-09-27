@@ -27,30 +27,48 @@ public class Problem3 {
         private static final double CAPACITY_FACTOR = 1.5;
         private static final int INITIAL_CAPACITY = 10;
         private Object[] stackArray;
-        private int size;
+        private int curIndex;
+        
+        public Stack(int initCapacity) {
+            stackArray = new Object[initCapacity];
+            curIndex = -1;
+        }
         
         public Stack() {
-            stackArray = new Object[INITIAL_CAPACITY];
-            size = -1;
+            this(INITIAL_CAPACITY);
+        }
+        
+        public T pop() {
+            T value = back();
+            curIndex--;
+            return value;
         }
         
         @SuppressWarnings("unchecked")
-        public T pop() {
-            if (size < 0) {
+        public T back() {
+            if (curIndex < 0) {
                 throw new IndexOutOfBoundsException("Stack is empty");
             }
-            return (T) stackArray[size--];
+            return (T) stackArray[curIndex];
         }
         
         public void push(T elem) {
-            if (++size >= stackArray.length) {
-                stackArray = Arrays.copyOf(stackArray, (int) (size * CAPACITY_FACTOR));
+            if (++curIndex >= stackArray.length) {
+                stackArray = Arrays.copyOf(stackArray, (int) (curIndex * CAPACITY_FACTOR));
             }
-            stackArray[size] = elem;
+            stackArray[curIndex] = elem;
         }
         
         public boolean isEmpty() {
-            return size == -1;
+            return curIndex == -1;
+        }
+        
+        public int getSize() {
+            return curIndex + 1;
+        }
+        
+        public void clear() {
+            curIndex = -1;
         }
     }
     

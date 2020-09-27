@@ -46,9 +46,13 @@ public class Problem4 {
         private Object[] stackArray;
         private int curIndex;
         
-        public Stack() {
-            stackArray = new Object[INITIAL_CAPACITY];
+        public Stack(int initCapacity) {
+            stackArray = new Object[initCapacity];
             curIndex = -1;
+        }
+        
+        public Stack() {
+            this(INITIAL_CAPACITY);
         }
         
         public T pop() {

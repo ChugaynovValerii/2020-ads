@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 public class Problem5 {
     private static void solve(final FastScanner in, final PrintWriter out) {
         String expression = in.next();
-        Queue<Integer> queue = new Queue<>();
+        Queue<Integer> queue = new Queue<>(100);
         while (!expression.equals("exit")) {
             switch (expression) {
                 case "push":
@@ -33,13 +33,14 @@ public class Problem5 {
     
     
     private static class Queue<T> {
-        private static final int INITIAL_CAPACITY = 100;
+        private final int initCapacity;
         private int lastIndex;
         private int firstIndex;
         private final Object[] queueArray;
         
-        public Queue() {
-            queueArray = new Object[INITIAL_CAPACITY];
+        public Queue(int initCapacity){
+            this.initCapacity = initCapacity;
+            queueArray = new Object[initCapacity];
             firstIndex = 0;
             lastIndex = firstIndex - 1;
         }
@@ -55,11 +56,11 @@ public class Problem5 {
             if (firstIndex > lastIndex) {
                 throw new IndexOutOfBoundsException("Queue is empty");
             }
-            return (T) queueArray[firstIndex % INITIAL_CAPACITY];
+            return (T) queueArray[firstIndex % initCapacity];
         }
         
         public void push(T elem) {
-            queueArray[++lastIndex % INITIAL_CAPACITY] = elem;
+            queueArray[++lastIndex % initCapacity] = elem;
         }
         
         public boolean isEmpty() {
