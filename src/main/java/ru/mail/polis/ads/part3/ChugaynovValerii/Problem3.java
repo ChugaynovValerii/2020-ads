@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
-//https://www.e-olymp.com/ru/submissions/7499118
+//https://www.e-olymp.com/ru/submissions/7499553
 
 public class Problem3 {
     private static void solve(final FastScanner in, final PrintWriter out) {
@@ -18,13 +18,8 @@ public class Problem3 {
         maxHeap.insert(Integer.MIN_VALUE);
         Heap<Integer> minHeap = new Heap<>(100, (i1, i2) -> -Integer.compare(i1, i2));
         minHeap.insert(Integer.MAX_VALUE);
-        while (true) {
-            int x;
-            try {
-                x = in.nextInt();
-            } catch (NullPointerException exception) {
-                break;
-            }
+        for (String number = in.next(); number != null; number = in.next()) {
+            int x = Integer.parseInt(number);
             if (count++ % 2 == 0) {
                 if (x > minHeap.peek()) {
                     maxHeap.insert(minHeap.extract());
@@ -135,7 +130,11 @@ public class Problem3 {
         String next() {
             while (tokenizer == null || !tokenizer.hasMoreTokens()) {
                 try {
-                    tokenizer = new StringTokenizer(reader.readLine());
+                    String s = reader.readLine();
+                    if (s == null) {
+                        return null;
+                    }
+                    tokenizer = new StringTokenizer(s);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
