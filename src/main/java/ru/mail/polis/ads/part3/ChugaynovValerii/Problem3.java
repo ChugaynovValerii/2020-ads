@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
-//https://www.e-olymp.com/ru/submissions/7496397
+//https://www.e-olymp.com/ru/submissions/7499118
 
 public class Problem3 {
     private static void solve(final FastScanner in, final PrintWriter out) {
@@ -19,27 +19,28 @@ public class Problem3 {
         Heap<Integer> minHeap = new Heap<>(100, (i1, i2) -> -Integer.compare(i1, i2));
         minHeap.insert(Integer.MAX_VALUE);
         while (true) {
+            int x;
             try {
-                int x = in.nextInt();
-                if (count++ % 2 == 0) {
-                    if (x > minHeap.peek()) {
-                        maxHeap.insert(minHeap.extract());
-                        minHeap.insert(x);
-                    } else {
-                        maxHeap.insert(x);
-                    }
-                    out.println(maxHeap.peek());
-                } else {
-                    if (x < maxHeap.peek()) {
-                        minHeap.insert(maxHeap.extract());
-                        maxHeap.insert(x);
-                    } else {
-                        minHeap.insert(x);
-                    }
-                    out.println((minHeap.peek() + maxHeap.peek()) / 2);
-                }
+                x = in.nextInt();
             } catch (NullPointerException exception) {
                 break;
+            }
+            if (count++ % 2 == 0) {
+                if (x > minHeap.peek()) {
+                    maxHeap.insert(minHeap.extract());
+                    minHeap.insert(x);
+                } else {
+                    maxHeap.insert(x);
+                }
+                out.println(maxHeap.peek());
+            } else {
+                if (x < maxHeap.peek()) {
+                    minHeap.insert(maxHeap.extract());
+                    maxHeap.insert(x);
+                } else {
+                    minHeap.insert(x);
+                }
+                out.println((minHeap.peek() + maxHeap.peek()) / 2);
             }
         }
     }
@@ -145,6 +146,7 @@ public class Problem3 {
         int nextInt() {
             return Integer.parseInt(next());
         }
+        
     }
     
     public static void main(final String[] arg) {
